@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block title %}Agregar Vehículo{% endblock %}
+{% block content %}
+<h2>Agregar Vehículo</h2>
+
+<form method="post">
+  {% csrf_token %}
+
+  <div class="mb-3">
+    <label class="form-label">Matrícula</label>
+    <input type="text" name="matricula" class="form-control" required>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Marca</label>
+    <input type="text" name="marca" class="form-control" required>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Modelo</label>
+    <input type="text" name="modelo" class="form-control" required>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Año</label>
+    <input type="number" name="anio" class="form-control" required>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Kilometraje</label>
+    <input type="number" name="kilometraje" class="form-control" required>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Color</label>
+    <input type="text" name="color" class="form-control" required>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Cliente</label>
+    <select name="cliente" class="form-select" required>
+      <option value="">Seleccione un cliente</option>
+      {% for cliente in clientes %}
+        <option value="{{ cliente.id }}">{{ cliente.nombre }} {{ cliente.apellido }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Servicio</label>
+    <select name="servicio" class="form-select" required>
+      <option value="">Seleccione un servicio</option>
+      {% for servicio in servicios %}
+        <option value="{{ servicio.id }}">{{ servicio.nombre }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <button class="btn btn-primary">
+    <i class="bi bi-save"></i> Guardar
+  </button>
+  <a href="{% url 'ver_vehiculo' %}" class="btn btn-secondary">
+    <i class="bi bi-x-lg"></i> Cancelar
+  </a>
+
+</form>
+{% endblock %}

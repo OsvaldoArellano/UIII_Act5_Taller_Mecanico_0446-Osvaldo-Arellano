@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Borrar Vehículo{% endblock %}
+{% block content %}
+<h2>Confirmar borrado</h2>
+<p>¿Deseas eliminar el vehículo con matrícula <strong>{{ vehiculo.matricula }}</strong> perteneciente a <strong>{{ vehiculo.cliente.nombre }} {{ vehiculo.cliente.apellido }}</strong>?</p>
+
+<form method="post">
+  {% csrf_token %}
+  <button class="btn btn-danger">
+    <i class="bi bi-trash-fill"></i> Sí, borrar
+  </button>
+  <a href="{% url 'ver_vehiculo' %}" class="btn btn-secondary">
+    <i class="bi bi-x-lg"></i> Cancelar
+  </a>
+</form>
+{% endblock %}

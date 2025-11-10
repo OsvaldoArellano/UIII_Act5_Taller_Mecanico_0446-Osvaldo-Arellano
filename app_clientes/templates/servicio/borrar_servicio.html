@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Borrar Servicio{% endblock %}
+{% block content %}
+<h2>Confirmar borrado</h2>
+<p>¿Deseas eliminar el servicio <strong>{{ servicio.nombre }}</strong>?</p>
+<form method="post">
+  {% csrf_token %}
+  <button class="btn btn-danger">
+    <i class="bi bi-trash-fill"></i> Sí, borrar
+  </button>
+  <a href="{% url 'ver_servicio' %}" class="btn btn-secondary">
+    <i class="bi bi-x-lg"></i> Cancelar
+  </a>
+</form>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}Ver Vehículos{% endblock %}
+{% block content %}
+<h2><i class="bi bi-car-front-fill"></i> Lista de Vehículos</h2>
+<a href="{% url 'agregar_vehiculo' %}" class="btn btn-success mb-3">
+  <i class="bi bi-plus-lg"></i> Agregar vehículo
+</a>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Cliente</th>
+      <th>Marca</th>
+      <th>Modelo</th>
+      <th>Año</th>
+      <th>Matrícula</th>
+      <th>Color</th>
+      <th>Servicio</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for v in vehiculos %}
+    <tr>
+      <td>{{ v.cliente.nombre }} {{ v.cliente.apellido }}</td>
+      <td>{{ v.marca }}</td>
+      <td>{{ v.modelo }}</td>
+      <td>{{ v.anio }}</td>
+      <td>{{ v.matricula }}</td>
+      <td>{{ v.color }}</td>
+      <td>{{ v.servicio.nombre }}</td>
+      <td>
+        <a class="btn btn-sm btn-info" href="{% url 'actualizar_vehiculo' v.id %}">
+          <i class="bi bi-pencil"></i> Editar
+        </a>
+        <a class="btn btn-sm btn-danger" href="{% url 'borrar_vehiculo' v.id %}">
+          <i class="bi bi-trash"></i> Borrar
+        </a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="8">No hay vehículos registrados.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Ver Servicios{% endblock %}
+{% block content %}
+<h2><i class="bi bi-gear-fill"></i> Lista de Servicios</h2>
+
+<a href="{% url 'agregar_servicio' %}" class="btn btn-success mb-3">
+  <i class="bi bi-plus-lg"></i> Agregar servicio
+</a>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Nombre del Servicio</th>
+      <th>Descripción</th>
+      <th>Precio Base ($)</th>
+      <th>Tiempo Estimado (min)</th>
+      <th>Aplica Garantía</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for s in servicios %}
+    <tr>
+      <td>{{ s.nombre }}</td>
+      <td>{{ s.descripcion|truncatewords:10 }}</td>
+      <td>{{ s.precio_base }}</td>
+      <td>{{ s.tiempo_est }}</td>
+      <td>{% if s.aplica_garantia %}Sí{% else %}No{% endif %}</td>
+      <td>
+        <a class="btn btn-sm btn-info" href="{% url 'actualizar_servicio' s.id %}">
+          <i class="bi bi-pencil"></i> Editar
+        </a>
+        <a class="btn btn-sm btn-danger" href="{% url 'borrar_servicio' s.id %}">
+          <i class="bi bi-trash"></i> Borrar
+        </a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="6">No hay servicios registrados.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

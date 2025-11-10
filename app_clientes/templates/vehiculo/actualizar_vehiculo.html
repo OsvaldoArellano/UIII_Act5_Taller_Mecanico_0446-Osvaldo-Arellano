@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %}Actualizar Vehículo{% endblock %}
+{% block content %}
+<h2>Editar Vehículo</h2>
+
+<form method="post" action="{% url 'realizar_actualizacion_vehiculo' vehiculo.id %}">
+  {% csrf_token %}
+
+  <div class="mb-3">
+    <label class="form-label">Matrícula</label>
+    <input type="text" name="matricula" value="{{ vehiculo.matricula }}" class="form-control" required>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Marca</label>
+    <input type="text" name="marca" value="{{ vehiculo.marca }}" class="form-control" required>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Modelo</label>
+    <input type="text" name="modelo" value="{{ vehiculo.modelo }}" class="form-control" required>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Año</label>
+    <input type="number" name="anio" value="{{ vehiculo.anio }}" class="form-control" required>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Kilometraje</label>
+    <input type="number" name="kilometraje" value="{{ vehiculo.kilometraje }}" class="form-control" required>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Color</label>
+    <input type="text" name="color" value="{{ vehiculo.color }}" class="form-control" required>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Cliente</label>
+    <select name="cliente" class="form-select" required>
+      {% for cliente in clientes %}
+        <option value="{{ cliente.id }}" {% if cliente.id == vehiculo.cliente.id %}selected{% endif %}>
+          {{ cliente.nombre }} {{ cliente.apellido }}
+        </option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Servicio</label>
+    <select name="servicio" class="form-select" required>
+      {% for servicio in servicios %}
+        <option value="{{ servicio.id }}" {% if servicio.id == vehiculo.servicio.id %}selected{% endif %}>
+          {{ servicio.nombre }}
+        </option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <button class="btn btn-primary">
+    <i class="bi bi-pencil-square"></i> Actualizar
+  </button>
+  <a href="{% url 'ver_vehiculo' %}" class="btn btn-secondary">
+    <i class="bi bi-x-lg"></i> Cancelar
+  </a>
+</form>
+
+{% endblock %}
